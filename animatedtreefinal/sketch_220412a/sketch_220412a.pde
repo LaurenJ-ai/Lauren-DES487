@@ -12,15 +12,15 @@ class pathfinder {
   pathfinder() {
     location = new PVector(width/2, height);
     velocity = new PVector(0, -1);
-    diameter = 32;
-    isFinished = false;
+    diameter = 10;
+    isFinished = true;
   }
   
   
    pathfinder(float w, float h) {
     location = new PVector(w, h);
     velocity = new PVector(0, -1);
-    diameter = 16;
+    diameter = 10;
     isFinished = false;
   }
 
@@ -49,7 +49,8 @@ class pathfinder {
         isFinished=true;
         noStroke();
 
-        fill(0, 166, 137, 137); // berry
+        //fill(0, 166, 137, 137); // berry
+         fill(random(50,100), random(100,250), random(0,150)); // berry
         ellipse(location.x, location.y, 5, 10);
         stroke(230, 255, 255, 50);
       }
@@ -104,7 +105,7 @@ void tree() {
 
 
 boolean grow=false;
-
+int trees=0;
 
 
 
@@ -117,7 +118,15 @@ void draw() {
   sky();
   if (mousePressed == true) {
     grow=true;
+    trees+=1;
+    //println(trees);
+    if (trees < 25){
     paths[0] = new pathfinder(mouseX,mouseY);
+    }else{
+      setup();
+      grow=false;
+      trees=0;
+    }
   }
 
   if (grow==true) {
